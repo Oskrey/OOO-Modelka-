@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище LegoStoreModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientFullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientPhoneNumber" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="ClientMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientPassord" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeRoleID" Type="int" Nullable="false" />
+          <Property Name="EmployeeFullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeePassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeePhoneNumber" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeStatus" Type="int" Nullable="false" />
+          <Property Name="EmployeeEmploymentDate" Type="date" Nullable="false" />
+          <Property Name="EmployeePhoto" Type="image" />
+          <Property Name="EmployeeNotes" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="ListOrderID" />
+            <PropertyRef Name="ListSet" />
+          </Key>
+          <Property Name="ListOrderID" Type="int" Nullable="false" />
+          <Property Name="ListSet" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ListCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderClientID" Type="int" />
+          <Property Name="OrderManagerID" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SetName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SetDiscription" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SetPrice" Type="float" Nullable="false" />
+          <Property Name="SetCategoryID" Type="int" Nullable="false" />
+          <Property Name="SetMaxDiscount" Type="int" Nullable="false" />
+          <Property Name="SetDiscount" Type="int" Nullable="false" />
+          <Property Name="SetPicture" Type="image" />
+        </EntityType>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="List" Type="Self.List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="ListOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Clients">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderList_Set">
+          <End Role="Set" Type="Self.Set" Multiplicity="1" />
+          <End Role="List" Type="Self.List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Set">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="ListSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Set_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Set" Type="Self.Set" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Set">
+              <PropertyRef Name="SetCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище LegoStoreModelContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Set" EntityType="Self.Set" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_Order" Association="Self.FK_List_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="List" EntitySet="List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Clients" Association="Self.FK_Order_Clients">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Employee" Association="Self.FK_Order_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderList_Set" Association="Self.FK_OrderList_Set">
+            <End Role="Set" EntitySet="Set" />
+            <End Role="List" EntitySet="List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Set_Category" Association="Self.FK_Set_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Set" EntitySet="Set" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LegoStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Set" Relationship="Self.FK_Set_Category" FromRole="Category" ToRole="Set" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientPhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ClientMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientPassord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Clients" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeRoleID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeePhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeStatus" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeEmploymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmployeePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EmployeeNotes" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Employee" FromRole="Employee" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="ListOrderID" />
+            <PropertyRef Name="ListSet" />
+          </Key>
+          <Property Name="ListOrderID" Type="Int32" Nullable="false" />
+          <Property Name="ListSet" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ListCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_List_Order" FromRole="List" ToRole="Order" />
+          <NavigationProperty Name="Set" Relationship="Self.FK_OrderList_Set" FromRole="List" ToRole="Set" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderClientID" Type="Int32" />
+          <Property Name="OrderManagerID" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Order_Clients" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Order_Employee" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="List" Relationship="Self.FK_List_Order" FromRole="Order" ToRole="List" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SetDiscription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="SetPrice" Type="Double" Nullable="false" />
+          <Property Name="SetCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="SetMaxDiscount" Type="Int32" Nullable="false" />
+          <Property Name="SetDiscount" Type="Int32" Nullable="false" />
+          <Property Name="SetPicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Set_Category" FromRole="Set" ToRole="Category" />
+          <NavigationProperty Name="List" Relationship="Self.FK_OrderList_Set" FromRole="Set" ToRole="List" />
+        </EntityType>
+        <Association Name="FK_Set_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Set" Type="Self.Set" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Set">
+              <PropertyRef Name="SetCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Clients">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="List" Type="Self.List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="ListOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderList_Set">
+          <End Role="Set" Type="Self.Set" Multiplicity="1" />
+          <End Role="List" Type="Self.List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Set">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="ListSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LegoStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="List" EntityType="Self.List" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Set" EntityType="Self.Set" />
+          <AssociationSet Name="FK_Set_Category" Association="Self.FK_Set_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Set" EntitySet="Set" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Clients" Association="Self.FK_Order_Clients">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Employee" Association="Self.FK_Order_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_Order" Association="Self.FK_List_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="List" EntitySet="List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderList_Set" Association="Self.FK_OrderList_Set">
+            <End Role="Set" EntitySet="Set" />
+            <End Role="List" EntitySet="List" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LegoStoreModelContainer" CdmEntityContainer="LegoStoreEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="LegoStoreModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="LegoStoreModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientFullName" ColumnName="ClientFullName" />
+                <ScalarProperty Name="ClientPhoneNumber" ColumnName="ClientPhoneNumber" />
+                <ScalarProperty Name="ClientMail" ColumnName="ClientMail" />
+                <ScalarProperty Name="ClientPassord" ColumnName="ClientPassord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="LegoStoreModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeRoleID" ColumnName="EmployeeRoleID" />
+                <ScalarProperty Name="EmployeeFullName" ColumnName="EmployeeFullName" />
+                <ScalarProperty Name="EmployeeMail" ColumnName="EmployeeMail" />
+                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+                <ScalarProperty Name="EmployeePhoneNumber" ColumnName="EmployeePhoneNumber" />
+                <ScalarProperty Name="EmployeeStatus" ColumnName="EmployeeStatus" />
+                <ScalarProperty Name="EmployeeEmploymentDate" ColumnName="EmployeeEmploymentDate" />
+                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+                <ScalarProperty Name="EmployeeNotes" ColumnName="EmployeeNotes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List">
+            <EntityTypeMapping TypeName="LegoStoreModel.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="ListOrderID" ColumnName="ListOrderID" />
+                <ScalarProperty Name="ListSet" ColumnName="ListSet" />
+                <ScalarProperty Name="ListCount" ColumnName="ListCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="LegoStoreModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderClientID" ColumnName="OrderClientID" />
+                <ScalarProperty Name="OrderManagerID" ColumnName="OrderManagerID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="LegoStoreModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Set">
+            <EntityTypeMapping TypeName="LegoStoreModel.Set">
+              <MappingFragment StoreEntitySet="Set">
+                <ScalarProperty Name="SetID" ColumnName="SetID" />
+                <ScalarProperty Name="SetName" ColumnName="SetName" />
+                <ScalarProperty Name="SetDiscription" ColumnName="SetDiscription" />
+                <ScalarProperty Name="SetPrice" ColumnName="SetPrice" />
+                <ScalarProperty Name="SetCategoryID" ColumnName="SetCategoryID" />
+                <ScalarProperty Name="SetMaxDiscount" ColumnName="SetMaxDiscount" />
+                <ScalarProperty Name="SetDiscount" ColumnName="SetDiscount" />
+                <ScalarProperty Name="SetPicture" ColumnName="SetPicture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
