@@ -36,7 +36,6 @@ namespace ООО__Моделька_
                     Helper.idRole = user.EmployeeRoleID;
                     if (Helper.idRole == 1)
                     {
-                        MessageBox.Show("Вы одмен");
                         FormCatalog formCatalog = new FormCatalog();
                         Hide();
                         formCatalog.ShowDialog();
@@ -67,6 +66,7 @@ namespace ООО__Моделька_
                         timerBlock.Start();
                         buttonAuth.Visible = false;
                         buttonGuest.Visible = false;
+                        buttonClient.Visible = false;
                         textBoxLogin.Text = "";
                         textBoxPassword.Text = "";
                         MessageBox.Show("Система заблокирована на 10 секунд", "Ошибка авторизации");
@@ -146,6 +146,7 @@ namespace ООО__Моделька_
                         timerBlock.Start();
                         buttonAuth.Visible = false;
                         buttonGuest.Visible = false;
+                        buttonClient.Visible = false;
                         textBoxLogin.Text = "";
                         textBoxPassword.Text = "";
                         MessageBox.Show("Система заблокирована на 10 секунд", "Ошибка авторизации");

@@ -117,7 +117,7 @@
     <Compile Include="Forms\FormEdit.Designer.cs">
       <DependentUpon>FormEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormAuth.resx">
       <DependentUpon>FormAuth.cs</DependentUpon>
@@ -175,6 +175,7 @@
       <LastGenOutput>ModelDB.cs</LastGenOutput>
     </Content>
     <Content Include="lego.ico" />
+    <Content Include="скрипт БД\Modelka.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LEGO_logo.jpeg" />

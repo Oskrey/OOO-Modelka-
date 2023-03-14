@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEdit));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -45,27 +45,26 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxSetDescription = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxMaxDiscount = new System.Windows.Forms.TextBox();
+            this.textBoxDiscount = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonAddPicture = new System.Windows.Forms.Button();
+            this.buttonDeletePicture = new System.Windows.Forms.Button();
+            this.pictureBoxSetImage = new System.Windows.Forms.PictureBox();
+            this.openFileDialogPic = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSetImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -94,6 +93,7 @@
             this.tableLayoutPanelButtons.Controls.Add(this.buttonSave, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonCancel, 0, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelButtons.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tableLayoutPanelButtons.Location = new System.Drawing.Point(3, 499);
             this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
@@ -101,12 +101,11 @@
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelButtons.Size = new System.Drawing.Size(794, 49);
             this.tableLayoutPanelButtons.TabIndex = 6;
-            this.tableLayoutPanelButtons.Visible = false;
             // 
             // buttonSave
             // 
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSave.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonSave.Location = new System.Drawing.Point(400, 2);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -115,11 +114,12 @@
             this.buttonSave.TabIndex = 1;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCancel.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.buttonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonCancel.Location = new System.Drawing.Point(3, 2);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -128,6 +128,7 @@
             this.buttonCancel.TabIndex = 0;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -150,7 +151,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Candara Light", 18F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label1.Location = new System.Drawing.Point(46, 0);
             this.label1.Name = "label1";
@@ -201,13 +202,13 @@
             this.tableLayoutPanel3.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.textBoxSetDescription, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label6, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox5, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxPrice, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.comboBox1, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxCategory, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox6, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox7, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxMaxDiscount, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxDiscount, 1, 6);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -252,6 +253,7 @@
             // textBoxSetID
             // 
             this.textBoxSetID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxSetID.Enabled = false;
             this.textBoxSetID.Location = new System.Drawing.Point(133, 3);
             this.textBoxSetID.Name = "textBoxSetID";
             this.textBoxSetID.Size = new System.Drawing.Size(290, 20);
@@ -284,13 +286,13 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "Цена набора";
             // 
-            // textBox5
+            // textBoxPrice
             // 
-            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox5.Location = new System.Drawing.Point(133, 335);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(290, 20);
-            this.textBox5.TabIndex = 5;
+            this.textBoxPrice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxPrice.Location = new System.Drawing.Point(133, 335);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(290, 20);
+            this.textBoxPrice.TabIndex = 5;
             // 
             // label7
             // 
@@ -301,20 +303,14 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Категория набора";
             // 
-            // comboBox1
+            // comboBoxCategory
             // 
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.categoryBindingSource, "CategoryName", true));
-            this.comboBox1.DataSource = this.categoryBindingSource;
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(133, 361);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(290, 21);
-            this.comboBox1.TabIndex = 6;
-            // 
-            // categoryBindingSource
-            // 
-            this.categoryBindingSource.DataSource = typeof(ООО__Моделька_.Entity.Category);
+            this.comboBoxCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxCategory.FormattingEnabled = true;
+            this.comboBoxCategory.Location = new System.Drawing.Point(133, 361);
+            this.comboBoxCategory.Name = "comboBoxCategory";
+            this.comboBoxCategory.Size = new System.Drawing.Size(290, 21);
+            this.comboBoxCategory.TabIndex = 6;
             // 
             // label8
             // 
@@ -334,49 +330,29 @@
             this.label9.TabIndex = 4;
             this.label9.Text = "Скидка";
             // 
-            // textBox6
+            // textBoxMaxDiscount
             // 
-            this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox6.Location = new System.Drawing.Point(133, 388);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(290, 20);
-            this.textBox6.TabIndex = 5;
+            this.textBoxMaxDiscount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxMaxDiscount.Location = new System.Drawing.Point(133, 388);
+            this.textBoxMaxDiscount.Name = "textBoxMaxDiscount";
+            this.textBoxMaxDiscount.Size = new System.Drawing.Size(290, 20);
+            this.textBoxMaxDiscount.TabIndex = 5;
             // 
-            // textBox7
+            // textBoxDiscount
             // 
-            this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox7.Location = new System.Drawing.Point(133, 414);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(290, 20);
-            this.textBox7.TabIndex = 5;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(3, 411);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(350, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Удалить фото";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 382);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(350, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Добавить фото";
-            this.button1.UseVisualStyleBackColor = true;
+            this.textBoxDiscount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDiscount.Location = new System.Drawing.Point(133, 414);
+            this.textBoxDiscount.Name = "textBoxDiscount";
+            this.textBoxDiscount.Size = new System.Drawing.Size(290, 20);
+            this.textBoxDiscount.TabIndex = 5;
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.button2, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonAddPicture, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.buttonDeletePicture, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.pictureBoxSetImage, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(435, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -387,17 +363,43 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(356, 437);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
-            // pictureBox1
+            // buttonAddPicture
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::ООО__Моделька_.Properties.Resources.LEGO_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(350, 373);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.buttonAddPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAddPicture.Location = new System.Drawing.Point(3, 382);
+            this.buttonAddPicture.Name = "buttonAddPicture";
+            this.buttonAddPicture.Size = new System.Drawing.Size(350, 23);
+            this.buttonAddPicture.TabIndex = 0;
+            this.buttonAddPicture.Text = "Добавить фото";
+            this.buttonAddPicture.UseVisualStyleBackColor = true;
+            this.buttonAddPicture.Click += new System.EventHandler(this.buttonAddPicture_Click);
+            // 
+            // buttonDeletePicture
+            // 
+            this.buttonDeletePicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDeletePicture.Location = new System.Drawing.Point(3, 411);
+            this.buttonDeletePicture.Name = "buttonDeletePicture";
+            this.buttonDeletePicture.Size = new System.Drawing.Size(350, 23);
+            this.buttonDeletePicture.TabIndex = 0;
+            this.buttonDeletePicture.Text = "Удалить фото";
+            this.buttonDeletePicture.UseVisualStyleBackColor = true;
+            this.buttonDeletePicture.Click += new System.EventHandler(this.buttonDeletePicture_Click);
+            // 
+            // pictureBoxSetImage
+            // 
+            this.pictureBoxSetImage.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxSetImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxSetImage.Image = global::ООО__Моделька_.Properties.Resources.LEGO_logo;
+            this.pictureBoxSetImage.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxSetImage.Name = "pictureBoxSetImage";
+            this.pictureBoxSetImage.Size = new System.Drawing.Size(350, 373);
+            this.pictureBoxSetImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSetImage.TabIndex = 1;
+            this.pictureBoxSetImage.TabStop = false;
+            // 
+            // openFileDialogPic
+            // 
+            this.openFileDialogPic.FileName = "openFileDialog1";
             // 
             // FormEdit
             // 
@@ -406,8 +408,10 @@
             this.BackColor = System.Drawing.Color.Red;
             this.ClientSize = new System.Drawing.Size(800, 550);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormEdit";
-            this.Text = "FormEdit";
+            this.Text = "Редактирование";
+            this.Load += new System.EventHandler(this.FormEdit_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -416,9 +420,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSetImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,17 +444,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxSetDescription;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.BindingSource categoryBindingSource;
+        private System.Windows.Forms.ComboBox comboBoxCategory;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBoxMaxDiscount;
+        private System.Windows.Forms.TextBox textBoxDiscount;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonAddPicture;
+        private System.Windows.Forms.Button buttonDeletePicture;
+        private System.Windows.Forms.PictureBox pictureBoxSetImage;
+        private System.Windows.Forms.OpenFileDialog openFileDialogPic;
     }
 }

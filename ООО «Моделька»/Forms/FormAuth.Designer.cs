@@ -131,7 +131,7 @@
             // 
             this.buttonClient.BackColor = System.Drawing.Color.White;
             this.buttonClient.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonClient.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.buttonClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonClient.Location = new System.Drawing.Point(168, 2);
             this.buttonClient.Margin = new System.Windows.Forms.Padding(2);
@@ -146,7 +146,7 @@
             // 
             this.buttonGuest.BackColor = System.Drawing.Color.White;
             this.buttonGuest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonGuest.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.buttonGuest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonGuest.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonGuest.Location = new System.Drawing.Point(2, 2);
             this.buttonGuest.Margin = new System.Windows.Forms.Padding(2);
@@ -237,7 +237,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label5.Location = new System.Drawing.Point(2, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -251,7 +251,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label6.Location = new System.Drawing.Point(2, 30);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -386,13 +386,14 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(152, 20);
             this.textBoxPassword.TabIndex = 3;
+            this.textBoxPassword.Text = "admin";
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label2.Location = new System.Drawing.Point(2, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -406,7 +407,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label3.Location = new System.Drawing.Point(2, 30);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -424,6 +425,7 @@
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(152, 20);
             this.textBoxLogin.TabIndex = 2;
+            this.textBoxLogin.Text = "admin";
             // 
             // checkBoxShowPass
             // 
@@ -455,7 +457,7 @@
             // 
             this.buttonAuth.BackColor = System.Drawing.Color.White;
             this.buttonAuth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAuth.Font = new System.Drawing.Font("Candara Light", 10F);
+            this.buttonAuth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonAuth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonAuth.Location = new System.Drawing.Point(2, 2);
             this.buttonAuth.Margin = new System.Windows.Forms.Padding(2);
@@ -487,7 +489,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAuth";
-            this.Text = "Form1";
+            this.Text = "Авторизация";
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);

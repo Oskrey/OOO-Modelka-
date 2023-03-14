@@ -79,11 +79,11 @@ namespace ООО__Моделька_.Forms
                     //Сортировка по скидке
                     if (comboBoxDiscount.SelectedIndex == 0)
                         set = set.Where(x => x.SetDiscount <= 5 ).ToList();
-                    else if (comboBoxCost.SelectedIndex == 1)
+                    else if (comboBoxDiscount.SelectedIndex == 1)
                         set = set.Where(x => x.SetDiscount > 5 && x.SetDiscount <= 15).ToList();
-                    else if (comboBoxCost.SelectedIndex == 2)
+                    else if (comboBoxDiscount.SelectedIndex == 2)
                         set = set.Where(x => x.SetDiscount > 15 && x.SetDiscount <= 25).ToList();
-                    else if (comboBoxCost.SelectedIndex == 3)
+                    else if (comboBoxDiscount.SelectedIndex == 3)
                         set = set.Where(x => x.SetDiscount > 25).ToList();
 
                     int i = 0;
@@ -109,7 +109,7 @@ namespace ООО__Моделька_.Forms
                         if (item.SetDiscount != 0)
                             dataGridViewData.Rows[i].Cells[2].Value += 
                             $"\n Размер скидка: {item.SetDiscount}" + "%"+
-                            $"\n Стоимость со скидкой: {item.SetPrice - (item.SetPrice/100*item.SetDiscount)}" + " 0руб.";
+                            $"\n Стоимость со скидкой: {item.SetPrice - (item.SetPrice/100*item.SetDiscount)}" + " руб.";
                         i++;
                     }
 
@@ -217,18 +217,24 @@ namespace ООО__Моделька_.Forms
             
             switch (Helper.idRole)
             {
-             
+                case -1:
+                    Text = "Каталог (гость)";
+                    return;
+
                 case 1:
                     comboBoxMode.Visible=true;
                     tableLayoutPanelButtons.Visible = true;
+                    Text = "Каталог (администратор)";
                     return;
                 case 2:
                     comboBoxMode.Visible=true;
+                    this.Text = "Каталог (менеджер)";
                     return;
                 case 3:
                     labelWelcome.Visible = true;
                     labelClientName.Visible = true;
                     labelClientName.Text = name;
+                    this.Text = "Каталог (клиент)";
                     return;
             }
 
@@ -259,5 +265,32 @@ namespace ООО__Моделька_.Forms
             UpdateDataDrid();
         }
 
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            int index = dataGridViewData.CurrentRow.Index;
+
+            if (index >= 0)
+            {
+                FormEdit formEdit = new FormEdit(dataGridViewData.Rows[index].Cells[0].Value.ToString());
+                Hide();
+                formEdit.ShowDialog();
+                Show();
+                UpdateDataDrid();
+            }
+            else
+            {
+                MessageBox.Show("Выбереите Товар");
+            }
+        }
+
+        private void buttonAddNew_Click(object sender, EventArgs e)
+        {
+            FormEdit formEdit = new FormEdit();
+            Hide();
+            formEdit.ShowDialog();
+            Show();
+            UpdateDataDrid();
+
+        }
     }
 }
